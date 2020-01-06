@@ -26,7 +26,11 @@ Route::get('pages/{projectId}/project', 'API\PageController@index');
     Route::apiResource('columns', 'API\ColumnController');
     Route::apiResource('contents', 'API\ContentController');
     Route::apiResource('contents_choices', 'API\ContentChoiceController');
+    //
+
+    Route::post('contents_choices_items/store', 'API\ContentChoiceItemController@store');
     Route::apiResource('contents_choices_items', 'API\ContentChoiceItemController');
+
     Route::put('contents_choices/{id}/updatePosition', 'API\ContentChoiceController@updateContentChoicesPosition');
 //});
 Route::post('auth/register', 'API\AuthController@register');

@@ -36,16 +36,20 @@ class ContentChoiceItemController extends Controller
                 $contentChoiceId = $request->input('content_choice_id');
             } else {
                 $contentChoice = ContentChoice::create([
-                    'description' => 'balls'
+                    'description' => implode("|", array_map(function($c) {
+                        return $c['text'];
+                    }, $request->input('html.choices')))
                 ]);
                 $contentChoiceId = $contentChoice->id;
             }
-            
-            $content = ContentChoiceItem::create([
-                'content_choice_id' => $contentChoiceId,
-                'value' => $request->input('value'),
-                'text' => $request->input('text')
-            ]);
+
+            foreach($request->input('html.choices') as $choice){
+                ContentChoiceItem::create([
+                    'content_choice_id' => $contentChoiceId,
+                    'value' => $choice['value'],
+                    'text' => $choice['text']
+                ]);
+            }
             DB::commit();
             return response()->json([
                 'success' => true,

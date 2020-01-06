@@ -55,8 +55,8 @@ return [
         ],*/
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'db4free.net',
-            'port' => '3306',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'database'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),            
